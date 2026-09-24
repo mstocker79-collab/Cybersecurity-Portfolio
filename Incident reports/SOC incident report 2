@@ -1,0 +1,72 @@
+“Hands-On Cybersecurity Investigations (TryHackMe)”
+Summary of incident
+
+At 09:32 CDT on September 8th, 2026, we received a High-severity alert indicating that a user had clicked a link contained
+in a suspected phishing email. The email appeared to impersonate Microsoft and directed the user to a fake login page.
+The incident was escalated to the SOC Team Lead for further investigation.
+
+Alert details
+
+Alert Name: Suspected Phishing Link
+Alert Source: Microsoft Sentinel
+Severity: High
+User Account: T.Ross
+Host: WIN CORP A12
+Time Window: 09:32–09:41 CDT
+Event Count: 1 suspicious email, 1 link click
+Source IP: 10.23.16.25
+User’s Normal Location: Rochester, MN
+
+Initial triage
+
+Using the SIEM and email security logs, I was able to determine that the user received an email containing a suspicious link.
+The destination domain was recently registered and did not match the legitimate Microsoft domain.
+
+I also contacted the user through internal messaging. The user confirmed that they had clicked the link but did not enter
+their password or MFA information.
+
+Investigation findings
+
+Phishing email successfully reached the user's inbox
+
+User clicked the malicious link
+
+Destination website was identified as a credential-harvesting page
+
+No credentials were entered
+
+No successful authentication from the malicious infrastructure was observed
+
+No evidence of malware execution was found on the endpoint
+
+Containment actions
+
+Removed the phishing email from affected mailboxes
+
+Blocked the malicious domain
+
+Added the sender to the email security block list
+
+Reviewed the user's recent authentication activity
+
+Recovery & remediation
+
+Confirmed that the user's credentials had not been submitted
+
+Added the malicious domain to SIEM monitoring
+
+Updated the phishing detection rule to identify similar messages
+
+Provided the user with additional phishing-awareness guidance
+
+Final assessment
+
+This was a phishing attempt that resulted in a user clicking a malicious link. There was no evidence that credentials were 
+submitted or that the attacker gained access to the user's account. The malicious domain and email were blocked, and 
+additional monitoring was implemented to detect similar activity.
+
+MITRE ATT&CK Mapping
+
+T1566.002 — Phishing: Spearphishing Link
+
+T1204.001 — User Execution: Malicious Link
